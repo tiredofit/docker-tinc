@@ -1,0 +1,80 @@
+#!/usr/bin/with-contenv bash
+sleep 2
+
+if [ ! -f /tmp/state/10-tinc ]; then
+
+	### Sanity Checks
+
+	if [ "_$NETWORK" = "_" ]; then echo 'No network name! Halting..'; sleep 86400; fi
+	if [ "_$NODE" = "_" ]; then echo 'No node name! Halting..'; sleep 86400; fi
+	if [ "_$PRIVATE_IP" = "_" ]; then echo 'No Private IP Set!'; sleep 86400; fi
+	if [ "_$PUBLIC_IP" = "_" ]; then echo 'No Public IP Set!'; sleep 86400; fi
+	if [ "_$INTERFACE" = "_" ]; then INTERFACE=tun0; fi
+	if [ "_$COMPRESSION" = "_" ]; then COMPRESSION=0; fi
+	if [ "_$CRON_PERIOD" = "_" ]; then CRON_PERIOD=30; fi
+	if [ "_$DEBUG" = "_" ]; then DEBUG=0; fi
+
+	### check if network exists
+	if [ ! -f /etc/tinc/$NETWORK/tinc.conf ]; then
+		echo 'No Tinc Network Detected.. Installing..'
+		mkdir -p /etc/tinc/$NETWORK/
+		git clone https://$GIT_USER:$GIT_PASS@$GIT_URL /etc/tinc/$NETWORK/hosts
+
+		if [ -f /etc/tinc/$NETWORK/hosts/$NODE ]; then
+			rm -rf /etc/tinc/$NETWORK/hosts/$NODE
+		fi
+	 
+		tinc -n $NETWORK init $NODE
+
+		# Declare public and private IPs in the host file, CONFIG/NET/hosts/HOST
+		echo "Address = "$PUBLIC_IP >> /etc/tinc/$NETWORK/hosts/$NODE
+		echo "Subnet = "$PRIVATE_IP"/32" >> /etc/tinc/$NETWORK/hosts/$NODE
+		echo "Cipher = id-aes256-GCM" >> /etc/tinc/$NETWORK/hosts/$NODE
+		echo "Digest = whirlpool" >> /etc/tinc/$NETWORK/hosts/$NODE
+		echo "MACLength = 16" >> /etc/tinc/$NETWORK/hosts/$NODE
+		echo "Compression = "$COMPRESSION >> /etc/tinc/$NETWORK/hosts/$NODE
+
+	    cd /etc/tinc/$NETWORK/hosts
+		git config --global user.email $NODE"@selfdesign.org"
+	    git config --global user.name $NODE
+
+	    git add .
+	    git commit -m "${NODE} - Reinitialized `date +%Y%m%d-%H%M%S`"
+	    git push
+	fi
+
+		# Set Runtime Configuration for Tinc
+		echo "Name = "$NODE > /etc/tinc/$NETWORK/tinc.conf
+		echo "AddressFamily = ipv4" >> /etc/tinc/$NETWORK/tinc.conf
+		echo "Device = /dev/net/tun"  >> /etc/tinc/$NETWORK/tinc.conf
+		echo "Interface = "$INTERFACE  >> /etc/tinc/$NETWORK/tinc.conf
+
+
+		peers=$(echo $PEERS | tr " " "\n")
+		for host in $peers
+		do
+		    echo "ConnectTo = "$host >> /etc/tinc/$NETWORK/tinc.conf
+		done
+
+		# Edit the tinc-up script
+		echo '#!/bin/sh' >/etc/tinc/$NETWORK/tinc-up
+		echo 'ifconfig '$INTERFACE $PRIVATE_IP' netmask 255.255.255.0' >> /etc/tinc/$NETWORK/tinc-up
+		
+		echo '#!/bin/sh' > /etc/tinc/$NETWORK/tinc-down
+		echo 'ifconfig '$INTERFACE' down' >> /etc/tinc/$NETWORK/tinc-down
+		
+		chmod +x /etc/tinc/$NETWORK/tinc-up
+		chmod +x /etc/tinc/$NETWORK/tinc-down
+
+	### Grab latest hosts entries from Git
+	    echo "Grabbing latest Hosts from Repository..."
+	    git -C /etc/tinc/$NETWORK/hosts/ pull
+               
+        mkdir -p /tmp/state
+		echo 'Initialization Complete' >/tmp/state/10-tinc
+fi
+
+echo ''
+### Startup Tinc
+echo 'Starting Tinc for Host '$NODE' on VPN:'$NETWORK
+exec tinc --net=$NETWORK start --no-detach --debug=$DEBUG --logfile=/var/log/tinc/tinc.$NETWORK.log

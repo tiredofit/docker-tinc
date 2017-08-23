@@ -1,0 +1,34 @@
+version: '2'
+services:
+
+  tinc-hostname-app:
+    container_name: tinc-hostname-app
+    restart: always
+    image: tiredofit/tinc:latest
+    ports:
+      - 655:655
+    volumes:
+      - ./data:/etc/tinc
+      - ./logs:/var/log/tinc
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    
+    hostname: hostname
+    environment:
+      - GIT_USER=username
+      - GIT_PASS=password
+      - GIT_URL=https://git.example.com/config/tinc-network
+      - ZABBIX_HOSTNAME=tinc-hostname-app      
+      - CRON_PERIOD=5
+      - DEBUG=1
+
+      - NETWORK=example
+      - NODE=hostname_example_org
+      - PUBLIC_IP=123.456.789.249
+      - PRIVATE_IP=172.22.0.243
+      - INTERFACE=tun0
+      - PEERS=hostname1_example_org hostname2_example_org
+      - COMPRESSION=9
+    network_mode: "host"

@@ -1,0 +1,14 @@
+/var/log/tinc/*.log {
+    daily
+    ifempty
+    rotate 7
+    missingok
+    compress
+    copytruncate
+    dateext
+    postrotate
+	tinc -n $NETWORK reload
+    endscript
+
+}
+
