@@ -37,13 +37,12 @@ This Container uses Alpine:Edge as a base.
 
 # Prerequisites
 
-This image relies on active credentials to the [git/config/](https://git/config/) repositories. 
-Create a Machine account in LDAP and assign priveleges in Git for the various tinc-hosts-NETWORKNAME.
+This image relies on a private Git Repository to store configuration data. Create a private repo and user account in git before proceeding.
 
 
 # Installation
 
-Automated builds of the image are available on [Registry](https://tiredofit/tinc) and is the recommended method of installation.
+Automated builds of the image are available on [Registry](https://hub.docker.com/tiredofit/tinc) and is the recommended method of installation.
 
 
 ```bash
@@ -77,17 +76,17 @@ Below is the complete list of available options that can be used to customize yo
 | Parameter | Description |
 |-----------|-------------|
 | `GIT_URL` | GIT Repository URL (ie `https://github.com/username/repo`)
-| `GIT_USER` | Username to Authenticate to git.selfdesign.org (e.g. username) |
-| `GIT_PASS` | Password for above user (e.g. password) |
-| `CRON_PERIOD` | Adjustable time to check GIT Server for any updates (Default: 5) |
-| `DEBUG` | Adjustable Debug level as per tinc documentation (e.g 5 Deault: 0) |
-| `NETWORK` | The VPN name - Script looks for repository in git/config//tinc-hosts-$NETWORK (e.g. securenetwork) |
-| `NODE` | The unique hostname of the machine joining the VPN (e.g. hostname) |
-| `PUBLIC_IP` | The public IP you wish to listen on (e.g. 137.233.212.121) |
-| `PRIVATE_IP` | The private IP that is assigned to this machine on the VPN (e.g. 172.16.23.13) |
-| `INTERFACE` | Which Interface to use (relies on /dev/tun) (e.g. tun0) |
-| `PEERS` | Which server should be used to contact first to create the mesh VPN (e.g. host1.hostname.com host2.hostname.com) |
-| `COMPRESSION` | Level of LZO Compression (e.g. 9) (Default: 1) |
+| `GIT_USER` | Username to Authenticate to git server (e.g. `username`) |
+| `GIT_PASS` | Password for above user (e.g. `password`) |
+| `CRON_PERIOD` | Adjustable time to check GIT Server for any updates (Default: `5`) |
+| `DEBUG` | Adjustable Debug level as per tinc documentation (e.g 5 Deault: `0`) |
+| `NETWORK` | The VPN name -  (e.g. `securenetwork`) |
+| `NODE` | The unique hostname of the machine joining the VPN (e.g. `hostname`) |
+| `PUBLIC_IP` | The public IP you wish to listen on (e.g. `137.233.212.121`) |
+| `PRIVATE_IP` | The private IP that is assigned to this machine on the VPN (e.g. `172.16.23.13`) |
+| `INTERFACE` | Which Interface to use (relies on /dev/tun) (e.g. `tun0`) |
+| `PEERS` | Which server should be used to contact first to create the mesh VPN (e.g. `host1.hostname.com` `host2.hostname.com`) |
+| `COMPRESSION` | Level of LZO Compression (e.g. 9) (Default: `1`) |
 
 
 ### Networking
