@@ -1,5 +1,9 @@
 #!/usr/bin/with-contenv bash
-sleep 2
+
+while [ ! -f /tmp/state/99-container-init ]
+do
+  sleep 1
+done
 
 if [ ! -f /tmp/state/10-tinc ]; then
 

@@ -46,25 +46,11 @@ MAINTAINER Dave Conroy <dave at tiredofit dot ca>
        rm -rf /tmp/tinc && \
        rm -rf /var/cache/apk/*
 
-### Assets
-  ADD assets /assets
-
-### S6 Setup
-  ADD install/s6 /etc/s6
-  ADD install/cont-init.d /etc/cont-init.d
-  RUN chmod +x /etc/cont-init.d/*.sh && \
-      chmod +x /etc/s6/services/*/run
-
-### Logrotate Setup
-  ADD install/logrotate.d /etc/logrotate.d
-
-### Zabbix Setup 
-  ADD install/zabbix /etc/zabbix
-  RUN #chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.sh && \
-      chown -R zabbix /etc/zabbix
+### Files Addition
+  ADD install /
 
 ### Networking Configuration
-   EXPOSE 655/tcp 655/udp
+  EXPOSE 655/tcp 655/udp
 
 ### Entrypoint Configuration
   ENTRYPOINT ["/init"]

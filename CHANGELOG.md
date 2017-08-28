@@ -1,3 +1,7 @@
+## 2.1 2017-08-27 <dave at tiredofit dot ca>
+
+* Minor File Cleanup
+
 ## 2.0 2017-07-09 <dave at tiredofit dot ca>
 
 * Rebase with Zabbix, S6, and Logrotate
