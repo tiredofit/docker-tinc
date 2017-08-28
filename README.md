@@ -42,7 +42,7 @@ This image relies on a private Git Repository to store configuration data. Creat
 
 # Installation
 
-Automated builds of the image are available on [Registry](https://hub.docker.com/tiredofit/tinc) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://hub.docker.com/tiredofit/tinc) and is the recommended method of installation.
 
 
 ```bash
@@ -71,7 +71,7 @@ The following directories are used for configuration and can be mapped for persi
 
 ### Environment Variables
 
-Below is the complete list of available options that can be used to customize your installation.
+Along with the Environment Variables from the [Base image](https://hub.docker.com/r/tiredofit/alpine), below is the complete list of available options that can be used to customize your installation.
 
 | Parameter | Description |
 |-----------|-------------|
