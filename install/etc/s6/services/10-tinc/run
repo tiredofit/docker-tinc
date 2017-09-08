@@ -39,7 +39,7 @@ if [ ! -f /tmp/state/10-tinc ]; then
 		echo "Compression = "$COMPRESSION >> /etc/tinc/$NETWORK/hosts/$NODE
 
 	    cd /etc/tinc/$NETWORK/hosts
-		git config --global user.email $NODE"@selfdesign.org"
+		git config --global user.email $NODE"@docker"
 	    git config --global user.name $NODE
 
 	    git add .

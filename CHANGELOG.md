@@ -1,3 +1,7 @@
+## 2.2 2017-09-08 <dave at tiredofit dot ca>
+
+* Minor Cron Fix
+
 ## 2.1 2017-08-27 <dave at tiredofit dot ca>
 
 * Minor File Cleanup
