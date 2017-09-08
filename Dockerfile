@@ -1,5 +1,5 @@
 FROM tiredofit/alpine:edge
-MAINTAINER Dave Conroy <dave at tiredofit dot ca>
+LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Environment Variables
    ENV TINC_VERSION=1.1pre14
