@@ -2,7 +2,7 @@ FROM tiredofit/alpine:edge
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Environment Variables
-   ENV TINC_VERSION=1.1pre14
+   ENV TINC_VERSION=1.1pre15
 
 ### Dependencies Installation       
    RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
