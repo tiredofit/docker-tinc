@@ -32,9 +32,9 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
            git \
     	   libpcap \
     	   lzo \
-         openssl \
-	       readline \
-   	     zlib && \
+           openssl \
+           readline \
+           zlib && \
                    
        mkdir /tmp/tinc && \
        curl http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz | tar xzvf - --strip 1 -C /tmp/tinc && \

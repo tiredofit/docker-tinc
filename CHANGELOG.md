@@ -1,6 +1,6 @@
 ## 2.3 2017-01-10 <dave at tiredofit dot ca>
 
-* Version Bump 1.1pre15
+* Version bump to 1.1pre15
 
 ## 2.2 2017-09-08 <dave at tiredofit dot ca>
 
