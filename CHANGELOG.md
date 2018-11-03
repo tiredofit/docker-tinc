@@ -1,4 +1,12 @@
-## 2.3 2017-01-10 <dave at tiredofit dot ca>
+## 2.4.1 2018-10-24 <dave at tiredofit dot ca>
+
+* Bump to 1.1pre17
+
+## 2.4 2018-07-15 <dave at tiredofit dot ca>
+
+* Bump to 1.1pre16
+
+## 2.3 2018-01-10 <dave at tiredofit dot ca>
 
 * Version bump to 1.1pre15
 
