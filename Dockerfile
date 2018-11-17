@@ -32,7 +32,7 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
        apk add -t .tinc-run-deps \
            ca-certificates \
            git \
-      	   libcrypto1.0 \
+      	   libcrypto1.1 \
            libpcap \
       	   lzo \
            openssl \

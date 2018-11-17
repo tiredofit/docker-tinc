@@ -1,3 +1,7 @@
+## 2.4.2 2018-11-17 <dave at tiredofit dot ca>
+
+* Update Libcrypto to 1.1
+
 ## 2.4.1 2018-10-24 <dave at tiredofit dot ca>
 
 * Bump to 1.1pre17
