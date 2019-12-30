@@ -1,11 +1,5 @@
 # hub.docker.com/tiredofit/tinc
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/tinc.svg)](https://hub.docker.com/r/tiredofit/tinc)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/tinc.svg)](https://hub.docker.com/r/tiredofit/tinc)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/tinc.svg)](https://hub.docker.com/r/tiredofit/tinc)
-[![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/tinc.svg)](https://microbadger.com/images/tiredofit/tinc)
-[![Image Size](https://img.shields.io/microbadger/image-size/tiredofit/tinc.svg)](https://microbadger.com/images/tiredofit/tinc)
-
 # Introduction
 
 Dockerfile to build a [tinc](https://www.tinc.org/) container image.
