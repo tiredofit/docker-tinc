@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-source /assets/functions/00-container
+for s in /assets/functions/*; do source $s; done
 PROCESS_NAME="tinc"
 
 ### Sanity Checks
@@ -77,7 +77,7 @@ chmod +x /etc/tinc/${NETWORK}/tinc-up
 chmod +x /etc/tinc/${NETWORK}/tinc-down
 
 ### Grab latest hosts entries from Git
-print_info "Grabbing latest Hosts from Repository..."
+print_notice "Grabbing latest Hosts from Repository..."
 silent git -C /etc/tinc/${NETWORK}/hosts/ pull
        
 liftoff

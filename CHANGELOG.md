@@ -1,3 +1,9 @@
+## 2.4.3 2020-01-02 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Additional changes to support new tiredofit/alpine base image
+
+
 ## 2.4.2 2018-11-17 <dave at tiredofit dot ca>
 
 * Update Libcrypto to 1.1
