@@ -1,12 +1,12 @@
 #!/usr/bin/with-contenv bash
 
-for s in /assets/functions/*; do source $s; done
+source /assets/functions/00-container
 PROCESS_NAME="tinc"
 
 check_container_initialized
 check_service_initialized init
 
-if [ "$DEBUG_MODE" = "TRUE" ] || [ "$DEBUG_MODE" = "true" ]; then 
+if var_true $DEBUG_MODE ; then
 	DEBUG=9
 else 
 	DEBUG=${DEBUG:-0}
