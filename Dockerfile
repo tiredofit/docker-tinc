@@ -5,7 +5,7 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 ENV TINC_VERSION=1.1pre17 \
 	  ENABLE_SMTP=false
 
-### Dependencies Installation       
+### Dependencies Installation
 RUN set -x && \
 	 echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
 	 apk update && \

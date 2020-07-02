@@ -1,17 +1,11 @@
 #!/usr/bin/with-contenv bash
 
 source /assets/functions/00-container
+prepare_service defaults single
 PROCESS_NAME="tinc"
 
 check_container_initialized
 check_service_initialized init
-
-if var_true $DEBUG_MODE ; then
-	DEBUG=9
-else 
-	DEBUG=${DEBUG:-0}
-fi
-
 liftoff
 
 ### Startup Tinc

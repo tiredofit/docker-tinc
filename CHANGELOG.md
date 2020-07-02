@@ -1,3 +1,13 @@
+## 2.6.0 2020-07-02 <dave at tiredofit dot ca>
+
+   ### Added
+      - Allow to function wihtout Git - Set `ENABLE_GIT=FALSE`
+
+   ### Changed
+      - Added some debug information when `CONTAINER_LOG_LEVEL=DEBUG`
+      - Fixed some scripting issues as per bash shellcheck
+
+
 ## 2.5.0 2020-06-09 <dave at tiredofit dot ca>
 
    ### Added
