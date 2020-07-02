@@ -32,6 +32,7 @@ if [ ! -f /etc/tinc/"${NETWORK}"/tinc.conf ]; then
 	    sanity_var GIT_USER "Git username"
 		sanity_var GIT_PASS "Git password"
 		sanity_var GIT_URL "Git URL"
+		print_debug "Cloning existing repository from Git"
 		git clone https://"$GIT_USER":"$GIT_PASS"@"$GIT_URL" /etc/tinc/"${NETWORK}"/hosts
 	else
 		mkdir -p /etc/tinc/"${NETWORK}"/hosts
