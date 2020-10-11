@@ -48,7 +48,7 @@ This image relies on a private Git Repository to store configuration data. Creat
 
 ## Installation
 
-Automated builds of the image are available on [Docker Hub](https://hub.docker.com/tiredofit/tinc) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/tinc) and is the recommended method of installation.
 
 
 ```bash
