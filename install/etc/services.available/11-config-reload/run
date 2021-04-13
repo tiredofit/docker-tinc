@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults 10-tinc
+PROCESS_NAME="tinc-config-reloader"
+
+check_container_initialized
+check_service_initialized init 10-tinc
+
+liftoff
+
+while inotifywait -q -e create,delete,modify,attrib /etc/tinc/ /etc/tinc/${NETWORK}/ ; do
+  print_info "Reloading Tinc due to a detected change"
+  silent tinc -n ${NETWORK} reload
+  exit 0
+done

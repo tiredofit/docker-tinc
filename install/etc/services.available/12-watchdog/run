@@ -1,0 +1,29 @@
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults 10-tinc
+PROCESS_NAME="tinc-watchdog"
+
+check_service_initialized init 10-tinc
+liftoff
+
+sleep 120
+
+while true ; do
+  sleep ${WATCHDOG_FREQUENCY}
+  print_debug "Checking for ping response for ${WATCHDOG_HOST}"
+  ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
+  if [ "$?" != "0" ]; then
+    print_debug "Watchdog Try #2"
+    ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
+    if [ "$?" != "0" ]; then
+      print_debug "Watchdog Try #3"
+      ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
+      if [ "$?" != "0" ]; then
+        print_info "Could not reach watchdog host ${WATCHDOG_HOST} - Restarting Tinc"
+        silent tinc -n ${NETWORK} stop
+      fi
+    fi
+  fi
+
+done

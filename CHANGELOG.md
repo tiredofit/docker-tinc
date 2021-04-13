@@ -1,3 +1,11 @@
+## 3.0.0 2021-04-12 <dave at tiredofit dot ca>
+
+   ### Added
+      - Configuration reloading capability if config files change
+      - Watchdog functionality to restart Tinc should a host not be accessible
+      - Environment variables for LISTEN_PORT, CIPHER, DIGEST, MAC_LENGTH
+      - Alpine 3.13 base
+
 ## 2.6.0 2020-07-02 <dave at tiredofit dot ca>
 
    ### Added
