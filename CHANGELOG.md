@@ -1,3 +1,10 @@
+## 3.0.1 2021-04-13 <dave at tiredofit dot ca>
+
+   ### Added
+      - Timestamp notification for watchdog and Configuration change
+   ### Changed
+      - Stop reloading Tinc at 23:59 for logrotate
+
 ## 3.0.0 2021-04-12 <dave at tiredofit dot ca>
 
    ### Added

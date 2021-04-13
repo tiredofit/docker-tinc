@@ -9,8 +9,8 @@ check_service_initialized init 10-tinc
 
 liftoff
 
-while inotifywait -q -e create,delete,modify,attrib /etc/tinc/ /etc/tinc/${NETWORK}/ ; do
-  print_info "Reloading Tinc due to a detected change"
+while silent inotifywait -q -e create,delete,modify,attrib /etc/tinc/ /etc/tinc/${NETWORK}/ /etc/tinc/${NETWORK}/hosts/ ; do
+  print_info "[$(date +"%Y%m%d-%H%M%S")] Reloading Tinc due to a detected change"
   silent tinc -n ${NETWORK} reload
   exit 0
 done

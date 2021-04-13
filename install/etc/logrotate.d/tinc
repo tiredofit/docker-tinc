@@ -6,9 +6,5 @@
     compress
     copytruncate
     dateext
-    postrotate
-	tinc -n $NETWORK reload
-    endscript
-
 }
 

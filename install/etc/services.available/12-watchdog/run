@@ -11,16 +11,16 @@ sleep 120
 
 while true ; do
   sleep ${WATCHDOG_FREQUENCY}
-  print_debug "Checking for ping response for ${WATCHDOG_HOST}"
+  print_debug "[$(date +"%Y%m%d-%H%M%S")] Checking for ping response for ${WATCHDOG_HOST}"
   ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
   if [ "$?" != "0" ]; then
-    print_debug "Watchdog Try #2"
+    print_debug "[$(date +"%Y%m%d-%H%M%S")] Watchdog Try #2"
     ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
     if [ "$?" != "0" ]; then
-      print_debug "Watchdog Try #3"
+      print_debug "[$(date +"%Y%m%d-%H%M%S")] Watchdog Try #3"
       ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
       if [ "$?" != "0" ]; then
-        print_info "Could not reach watchdog host ${WATCHDOG_HOST} - Restarting Tinc"
+        print_info "[$(date +"%Y%m%d-%H%M%S")] Could not reach watchdog host ${WATCHDOG_HOST} - Restarting Tinc"
         silent tinc -n ${NETWORK} stop
       fi
     fi

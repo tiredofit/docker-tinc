@@ -54,6 +54,7 @@ RUN set -x && \
 	make install src && \
 	apk del --no-cache --purge .tinc-build-deps && \
 	mkdir /var/log/tinc && \
+        rm -rf /etc/logrotate.d/* && \
 	rm -rf /usr/src/* && \
 	rm -rf /var/cache/apk/*
 
