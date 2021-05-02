@@ -56,11 +56,11 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 		if var_true "${ENABLE_GIT}" ; then
 			cd /etc/tinc/"${NETWORK}"/hosts
 
-			git config --global user.email "${NODE}""@docker"
-			git config --global user.name "${NODE}"
+			silent git config --global user.email "${NODE}""@docker"
+			silent git config --global user.name "${NODE}"
 
 			print_debug "Adding new node to Git"
-			git add .
+			silent git add .
 			print_debug "Comitting Changes to Git"
 			silent git commit -m "${NODE} - Reinitialized $(date +%Y%m%d-%H%M%S)"
 			print_debug "Pushing to Git"
