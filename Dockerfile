@@ -1,5 +1,5 @@
-FROM tiredofit/alpine:3.13
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+FROM tiredofit/alpine:3.14
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Environment Variables
 ENV TINC_VERSION=1.1pre17 \
@@ -18,7 +18,6 @@ RUN set -x && \
 						gcc \
 						libc-utils \
 						libpcap-dev \
-						libressl \
 						linux-headers \
 						lzo-dev \
 						make \
