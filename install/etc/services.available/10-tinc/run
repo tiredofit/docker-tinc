@@ -9,5 +9,5 @@ check_service_initialized init
 liftoff
 
 ### Startup Tinc
-print_info "Starting Tinc ${TINC_VERSION} for Host '${NODE}' on VPN '${NETWORK}'"
+print_start "Starting Tinc ${TINC_VERSION} for Host '${NODE}' on VPN '${NETWORK}'"
 exec tinc --net=${NETWORK} start --no-detach --debug=${DEBUG} --logfile=/var/log/tinc/tinc.${NETWORK}.log

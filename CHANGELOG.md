@@ -1,8 +1,8 @@
-## 3.0.2 2021-06-17 <dave at tiredofit dot ca>
+## 3.1.0 2021-07-03 <dave at tiredofit dot ca>
 
    ### Added
       - Alpine 3.14 Base
-      - Strip Libressl and replace with OpenSSL
+      - Tinc 1.1pre18
 
 
 ## 3.0.1 2021-04-13 <dave at tiredofit dot ca>

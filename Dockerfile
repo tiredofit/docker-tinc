@@ -2,8 +2,8 @@ FROM tiredofit/alpine:3.14
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Environment Variables
-ENV TINC_VERSION=1.1pre17 \
-	ENABLE_SMTP=false
+ENV TINC_VERSION=1.1pre18 \
+    CONTAINER_ENABLE_MESSAGING=FALSE
 
 ### Dependencies Installation
 RUN set -x && \
@@ -22,7 +22,7 @@ RUN set -x && \
 						lzo-dev \
 						make \
 						ncurses-dev \
-						openssl-dev \
+						libressl-dev \
 						readline-dev \
 						tar \
 						zlib-dev \
@@ -35,7 +35,7 @@ RUN set -x && \
 						libcrypto1.1 \
 						libpcap \
 						lzo \
-						openssl \
+						libressl \
 						readline \
 						zlib && \
 	\
