@@ -1,6 +1,6 @@
 # logship: tinc
 
-<LOG_LOCATION>/*.log {
+<LOG_PATH>/*.log {
     daily
     ifempty
     rotate 7
@@ -9,4 +9,3 @@
     copytruncate
     dateext
 }
-

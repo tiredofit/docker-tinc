@@ -1,3 +1,9 @@
+## 3.1.2 2021-08-30 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix logrotate
+
+
 ## 3.1.1 2021-08-30 <dave at tiredofit dot ca>
 
    ### Added
