@@ -1,3 +1,9 @@
+## 3.1.1 2021-08-30 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add fluent-bit log parsing configuration
+
+
 ## 3.1.0 2021-07-03 <dave at tiredofit dot ca>
 
    ### Added

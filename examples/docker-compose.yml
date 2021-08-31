@@ -18,7 +18,7 @@ services:
       - GIT_USER=username
       - GIT_PASS=password
       - GIT_URL=https://git.example.com/config/tinc-network
-      - ZABBIX_HOSTNAME=tinc-hostname-app      
+      - CONTAINER_NAME=tinc-hostname-app      
       - CRON_PERIOD=5
       - DEBUG=1
 

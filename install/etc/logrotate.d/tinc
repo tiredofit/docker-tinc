@@ -1,4 +1,6 @@
-/var/log/tinc/*.log {
+# logship: tinc
+
+<LOG_LOCATION>/*.log {
     daily
     ifempty
     rotate 7

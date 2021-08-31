@@ -10,4 +10,4 @@ liftoff
 
 ### Startup Tinc
 print_start "Starting Tinc ${TINC_VERSION} for Host '${NODE}' on VPN '${NETWORK}'"
-exec tinc --net=${NETWORK} start --no-detach --debug=${DEBUG} --logfile=/var/log/tinc/tinc.${NETWORK}.log
+tinc --net=${NETWORK} start --no-detach --debug=${DEBUG} --logfile=${LOG_PATH}/${NETWORK}.log

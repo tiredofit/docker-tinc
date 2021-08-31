@@ -109,6 +109,8 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 	chmod 600 /etc/tinc/${NETWORK}/*.priv
 	chmod +x /etc/tinc/${NETWORK}/tinc-up
 	chmod +x /etc/tinc/${NETWORK}/tinc-down
+
+	mkdir -p ${LOG_PATH}
 fi
 
 liftoff
