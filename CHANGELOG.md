@@ -1,3 +1,9 @@
+## 3.1.3 2021-09-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change the way that logrotate configuration occurs
+
+
 ## 3.1.2 2021-08-30 <dave at tiredofit dot ca>
 
    ### Changed

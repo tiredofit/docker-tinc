@@ -111,7 +111,8 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 	chmod +x /etc/tinc/${NETWORK}/tinc-down
 
 	mkdir -p ${LOG_PATH}
-	sed -i "s|<LOG_PATH>|${LOG_PATH}|g" /etc/logrotate.d/tinc
+	touch ${LOG_PATH}/${NETWORK}.log
+	create_logrotate tinc ${LOG_PATH}/${NETWORK}.log tinc
 fi
 
 liftoff
