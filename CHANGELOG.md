@@ -1,3 +1,9 @@
+## 3.1.4 2021-10-24 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Update fluent-bit log details
+
+
 ## 3.1.3 2021-09-04 <dave at tiredofit dot ca>
 
    ### Changed

@@ -33,7 +33,7 @@ This will build a Docker Image for [tinc](https://www.tinc.org/) - A VPN service
 - [Installation](#installation)
   - [Build from Source](#build-from-source)
   - [Prebuilt Images](#prebuilt-images)
-    - [Multi Archictecture](#multi-archictecture)
+    - [Multi Architecture](#multi-archictecture)
 - [Configuration](#configuration)
   - [Quick Start](#quick-start)
   - [Persistent Storage](#persistent-storage)
@@ -68,7 +68,7 @@ The following image tags are available along with their tagged release based on 
 | ------------ | --------- |
 | Alpine       | `:latest` |
 
-#### Multi Archictecture
+#### Multi Architecture
 Images are built primarily for `amd64` architecture, and may also include builds for `arm/v6`, `arm/v7`, `arm64` and others. These variants are all unsupported. Consider [sponsoring](https://github.com/sponsors/tiredofit) my work so that I can work with various hardware. To see if this image supports multiple architecures, type `docker manifest (image):(tag)`
 
 ## Configuration

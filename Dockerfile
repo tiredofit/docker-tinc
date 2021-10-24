@@ -1,4 +1,4 @@
-FROM tiredofit/alpine:3.14
+FROM docker.io/tiredofit/alpine:3.14
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Environment Variables
