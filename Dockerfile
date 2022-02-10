@@ -3,7 +3,9 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Environment Variables
 ENV TINC_VERSION=1.1pre18 \
-    CONTAINER_ENABLE_MESSAGING=FALSE
+    CONTAINER_ENABLE_MESSAGING=FALSE \
+    IMAGE_NAME="tiredofit/tinc" \
+    IMAGE_REPO_URL="https://github.com/tiredofit/docker-tinc/"
 
 ### Dependencies Installation
 RUN set -x && \
