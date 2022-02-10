@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 CIPHER=${CIPHER:-"aes-256-cbc"}
 COMPRESSION=${COMPRESSION:-0}
