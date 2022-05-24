@@ -11,7 +11,6 @@ ENV TINC_VERSION=latest \
 RUN set -x && \
 	apk update && \
 	apk upgrade && \
-	\
 	apk add -t .tinc-build-deps \
 						autoconf \
 						build-base \
@@ -21,8 +20,11 @@ RUN set -x && \
 						libc-utils \
 						libpcap-dev \
 						linux-headers \
+						lz4-dev \
 						lzo-dev \
 						make \
+						meson \
+						ninja \
 						ncurses-dev \
 						libressl-dev \
 						readline-dev \
@@ -36,23 +38,21 @@ RUN set -x && \
 						inotify-tools \
 						libcrypto1.1 \
 						libpcap \
+						lz4 \
+						lz4-libs \
 						lzo \
 						libressl \
+						ncurses \
 						readline \
 						zlib && \
 	\
 	mkdir -p /usr/src/tinc && \
-	curl http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz | tar xzvf - --strip 1 -C /usr/src/tinc && \
+	git clone https://github.com/gsliepen/tinc /usr/src/tinc && \
 	cd /usr/src/tinc && \
-	./configure \
-			--prefix=/usr \
-			--enable-jumbograms \
-			--enable-tunemu \
-			--sysconfdir=/etc \
-			--localstatedir=/var \
-			&& \
-	make -j$(getconf _NPROCESSORS_ONLN) && \
-	make install src && \
+	git checkout ${TINC_VERSION} && \
+	meson setup builddir -Dprefix=/usr -Dsysconfdir=/etc -Djumbograms=true -Dtunemu=enabled -Dbuildtype=release && \
+	meson compile -C builddir && \
+	meson install -C builddir && \
 	apk del --no-cache --purge .tinc-build-deps && \
 	mkdir /var/log/tinc && \
 	rm -rf /etc/logrotate.d/* && \

@@ -1,3 +1,11 @@
+## 3.2.0 2022-05-24 <dave at tiredofit dot ca>
+
+   ### Added
+      - Switch build process to use meson as opposed to old ./configure routines to support building from master
+      - Add LZ4 compression support
+      - Add ncurses for TUI
+
+
 ## 3.1.8 2022-05-24 <dave at tiredofit dot ca>
 
    ### Added
