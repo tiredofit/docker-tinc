@@ -1,3 +1,10 @@
+## 3.1.8 2022-05-24 <dave at tiredofit dot ca>
+
+   ### Added
+      - Alpine 3.16 base
+      - Switch to Tinc Master branch
+
+
 ## 3.1.7 2022-02-09 <dave at tiredofit dot ca>
 
    ### Changed

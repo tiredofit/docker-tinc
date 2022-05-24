@@ -1,8 +1,8 @@
-FROM docker.io/tiredofit/alpine:3.15
+FROM docker.io/tiredofit/alpine:3.16
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Environment Variables
-ENV TINC_VERSION=1.1pre18 \
+ENV TINC_VERSION=latest \
     CONTAINER_ENABLE_MESSAGING=FALSE \
     IMAGE_NAME="tiredofit/tinc" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-tinc/"
