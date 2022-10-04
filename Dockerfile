@@ -8,53 +8,51 @@ ENV TINC_VERSION=latest \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-tinc/"
 
 ### Dependencies Installation
-RUN set -x && \
-	apk update && \
-	apk upgrade && \
-	apk add -t .tinc-build-deps \
-						autoconf \
-						build-base \
-						curl \
-						g++ \
-						gcc \
-						libc-utils \
-						libpcap-dev \
-						linux-headers \
-						lz4-dev \
-						lzo-dev \
-						make \
-						meson \
-						ninja \
-						ncurses-dev \
-						libressl-dev \
-						readline-dev \
-						tar \
-						zlib-dev \
-						&& \
+RUN source /assets/functions/00-container && \
+    set -x && \
+    apk update && \
+    apk upgrade && \
+    apk add -t .tinc-build-deps \
+				autoconf \
+				build-base \
+				curl \
+				g++ \
+				gcc \
+				libc-utils \
+				libpcap-dev \
+				linux-headers \
+				lz4-dev \
+				lzo-dev \
+				make \
+				meson \
+				ninja \
+				ncurses-dev \
+				libressl-dev \
+				readline-dev \
+				tar \
+				zlib-dev \
+				&& \
 	\
-	apk add -t .tinc-run-deps \
-						ca-certificates \
-						git \
-						inotify-tools \
-						libcrypto1.1 \
-						libpcap \
-						lz4 \
-						lz4-libs \
-						lzo \
-						libressl \
-						ncurses \
-						readline \
-						zlib && \
+    apk add -t .tinc-run-deps \
+				ca-certificates \
+				git \
+				inotify-tools \
+				libcrypto1.1 \
+				libpcap \
+				lz4 \
+				lz4-libs \
+				lzo \
+				libressl \
+				ncurses \
+				readline \
+				zlib && \
 	\
-	mkdir -p /usr/src/tinc && \
-	git clone https://github.com/gsliepen/tinc /usr/src/tinc && \
-	cd /usr/src/tinc && \
-	git checkout ${TINC_VERSION} && \
+	clone_git_repo https://github.com/gsliepen/tinc ${TINC_VERSION} && \
 	meson setup builddir -Dprefix=/usr -Dsysconfdir=/etc -Djumbograms=true -Dtunemu=enabled -Dbuildtype=release && \
 	meson compile -C builddir && \
 	meson install -C builddir && \
 	apk del --no-cache --purge .tinc-build-deps && \
-	mkdir /var/log/tinc && \
+	mkdir -p /var/log/tinc && \
 	rm -rf /etc/logrotate.d/* && \
 	rm -rf /usr/src/* && \
 	rm -rf /var/cache/apk/*
