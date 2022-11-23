@@ -1,4 +1,4 @@
-FROM docker.io/tiredofit/alpine:3.16
+FROM docker.io/tiredofit/alpine:3.17
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Environment Variables
@@ -27,7 +27,7 @@ RUN source /assets/functions/00-container && \
 				meson \
 				ninja \
 				ncurses-dev \
-				libressl-dev \
+				openssl-dev \
 				readline-dev \
 				tar \
 				zlib-dev \
@@ -37,12 +37,11 @@ RUN source /assets/functions/00-container && \
 				ca-certificates \
 				git \
 				inotify-tools \
-				libcrypto1.1 \
 				libpcap \
 				lz4 \
 				lz4-libs \
 				lzo \
-				libressl \
+				openssl \
 				ncurses \
 				readline \
 				zlib && \
@@ -61,4 +60,4 @@ RUN source /assets/functions/00-container && \
 EXPOSE 655/tcp 655/udp
 
 ### Files Addition
-ADD install /
+COPY install /
