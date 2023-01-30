@@ -65,7 +65,7 @@ Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tired
 Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-/pkgs/container/docker-) 
  
 ```
-docker pull ghcr.io/tiredofit/docker-/pkgs/container/docker-):(imagetag)
+docker pull ghcr.io/tiredofit/docker-:(imagetag)
 ``` 
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
