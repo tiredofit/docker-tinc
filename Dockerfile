@@ -1,18 +1,16 @@
-FROM docker.io/tiredofit/alpine:3.17
+FROM docker.io/tiredofit/alpine:3.18
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-### Environment Variables
 ENV TINC_VERSION=latest \
     CONTAINER_ENABLE_MESSAGING=FALSE \
     IMAGE_NAME="tiredofit/tinc" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-tinc/"
 
-### Dependencies Installation
 RUN source /assets/functions/00-container && \
     set -x && \
-    apk update && \
-    apk upgrade && \
-    apk add -t .tinc-build-deps \
+    package update && \
+    package upgrade && \
+    package add .tinc-build-deps \
 				autoconf \
 				build-base \
 				curl \
@@ -33,7 +31,7 @@ RUN source /assets/functions/00-container && \
 				zlib-dev \
 				&& \
 	\
-    apk add -t .tinc-run-deps \
+    package add .tinc-run-deps \
 				ca-certificates \
 				git \
 				inotify-tools \
@@ -46,18 +44,15 @@ RUN source /assets/functions/00-container && \
 				readline \
 				zlib && \
 	\
-	clone_git_repo https://github.com/gsliepen/tinc ${TINC_VERSION} && \
-	meson setup builddir -Dprefix=/usr -Dsysconfdir=/etc -Djumbograms=true -Dtunemu=enabled -Dbuildtype=release && \
-	meson compile -C builddir && \
-	meson install -C builddir && \
-	apk del --no-cache --purge .tinc-build-deps && \
-	mkdir -p /var/log/tinc && \
-	rm -rf /etc/logrotate.d/* && \
-	rm -rf /usr/src/* && \
-	rm -rf /var/cache/apk/*
+    clone_git_repo https://github.com/gsliepen/tinc ${TINC_VERSION} && \
+    meson setup builddir -Dprefix=/usr -Dsysconfdir=/etc -Djumbograms=true -Dtunemu=enabled -Dbuildtype=release && \
+    meson compile -C builddir && \
+    meson install -C builddir && \
+    package remove .tinc-build-deps && \
+    mkdir -p /var/log/tinc && \
+    rm -rf /etc/logrotate.d/* \
+    rm -rf /usr/src/*
 
-### Networking Configuration
 EXPOSE 655/tcp 655/udp
 
-### Files Addition
 COPY install /
