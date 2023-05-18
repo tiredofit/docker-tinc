@@ -81,7 +81,7 @@ Images are built primarily for `amd64` architecture, and may also include builds
 
 ### Quick Start
 
-* The quickest way to get started is using [docker-compose](https://docs.docker.com/compose/). See the examples folder for a working [docker-compose.yml](examples/docker-compose.yml) that can be modified for development or production use.
+* The quickest way to get started is using [docker-compose](https://docs.docker.com/compose/). See the examples folder for a working [compose.yml](examples/compose.yml) that can be modified for development or production use.
 
 * Set various [environment variables](#environment-variables) to understand the capabilities of this image.
 * Map [persistent storage](#data-volumes) for access to configuration and data files for backup.
@@ -142,7 +142,7 @@ The following ports are exposed.
 | ----- | ----------- |
 | `655` | Tinc        |
 
-> **NOTE**: You must also allow capabilities for `NET_ADMIN` to docker to be able to have access to the IP Stack. Also, you must create `/dev/tun` as a device. If you want to make the Docker Host be able to be accessible you also must add `network:host` as an option otherwise only the containers will be accessible. See the working docker-compose.yml example as shown above.
+> **NOTE**: You must also allow capabilities for `NET_ADMIN` to docker to be able to have access to the IP Stack. Also, you must create `/dev/tun` as a device. If you want to make the Docker Host be able to be accessible you also must add `network:host` as an option otherwise only the containers will be accessible. See the working compose.yml example as shown above.
 
 * * *
 ## Maintenance
