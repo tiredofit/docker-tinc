@@ -11,18 +11,8 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 	sanity_var PRIVATE_IP "Private IP"
 	sanity_var PUBLIC_IP "Public IP"
 
-	if var_true "${DEBUG_MODE}" ; then
-		DEBUG=9
-	else
-		DEBUG=${DEBUG:-0}
-	fi
-
 	if var_true ${ENABLE_GIT} ; then
-		### Adjust Runtime Variables for Crontab
-		sed -i -e "s#<NETWORK>#${NETWORK}#g" /assets/cron/crontab.txt
-		sed -i -e "s#<CRON_PERIOD>#${CRON_PERIOD}#g" /assets/cron/crontab.txt
-	else
-		rm -rf /assets/cron/crontab.txt
+		echo "*/${CRON_PERIOD} * * * * git -C /etc/tinc/${NETWORK}/hosts/ pull >/dev/null 2>&1" > /assets/cron/crontab.txt
 	fi
 
 	### check if network exists
@@ -34,7 +24,7 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 			sanity_var GIT_PASS "Git password"
 			sanity_var GIT_URL "Git URL"
 			print_debug "Cloning existing repository from Git"
-			git clone https://"$GIT_USER":"$GIT_PASS"@"$GIT_URL" /etc/tinc/"${NETWORK}"/hosts
+			git clone https://"${GIT_USER}":"${GIT_PASS}"@"${GIT_URL}" /etc/tinc/"${NETWORK}"/hosts
 		else
 			mkdir -p /etc/tinc/"${NETWORK}"/hosts
 		fi
@@ -46,47 +36,52 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 		tinc -n "${NETWORK}" init "${NODE}"
 
 		# Declare public and private IPs in the host file, CONFIG/NET/hosts/HOST
-		echo "Address = ${PUBLIC_IP} ${LISTEN_PORT}" >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
-		echo "Subnet = ${PRIVATE_IP}/32" >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
-		echo "Cipher = ${CIPHER}" >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
-		echo "Digest = ${DIGEST}" >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
-		echo "MACLength = ${MAC_LENGTH}" >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
-		echo "Compression = ${COMPRESSION}" >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
+        cat << EOF >> /etc/tinc/"${NETWORK}"/hosts/"${NODE}"
+Address = ${PUBLIC_IP} ${LISTEN_PORT}
+Subnet = ${PRIVATE_IP}/32
+Cipher = ${CIPHER}
+Digest = ${DIGEST}
+MACLength = ${MAC_LENGTH}
+Compression = ${COMPRESSION}
+EOF
 
 		if var_true "${ENABLE_GIT}" ; then
 			cd /etc/tinc/"${NETWORK}"/hosts
-
 			silent git config --global user.email "${NODE}""@docker"
 			silent git config --global user.name "${NODE}"
-
 			print_debug "Adding new node to Git"
 			silent git add .
 			print_debug "Comitting Changes to Git"
-			silent git commit -m "${NODE} - Reinitialized $(date +%Y%m%d-%H%M%S)"
+			silent git commit -m "${NODE} - Reinitialized $(TZ="${TIMEZONE}" date +"%Y%m%d-%H%M%S")"
 			print_debug "Pushing to Git"
 			silent git push
 		fi
 	fi
 
 	# Set Runtime Configuration for Tinc
-	echo "Name = ${NODE}" > /etc/tinc/"${NETWORK}"/tinc.conf
-	echo "BindToAddress * ${LISTEN_PORT}" >> /etc/tinc/"${NETWORK}"/tinc.conf
-	echo "AddressFamily = ipv4" >> /etc/tinc/"${NETWORK}"/tinc.conf
-	echo "Device = /dev/net/tun"  >> /etc/tinc/"${NETWORK}"/tinc.conf
-	echo "Interface = ${INTERFACE}"  >> /etc/tinc/"${NETWORK}"/tinc.conf
+    cat << EOF > /etc/tinc/"${NETWORK}"/tinc.conf
+Name = ${NODE}
+BindToAddress * ${LISTEN_PORT}
+AddressFamily = ipv4
+Device = /dev/net/tun
+Interface = ${INTERFACE}
+EOF
 
-	peers=$(echo "${PEERS}" | tr " " "\n")
-	for host in $peers
-	do
-		echo "ConnectTo = ""$host" >> /etc/tinc/"${NETWORK}"/tinc.conf
+	tinc_peers=$(echo "${PEERS}" | tr " " "\n" | uniq)
+	for host in $tinc_peers ; do
+		echo "ConnectTo = ${host}" >> /etc/tinc/"${NETWORK}"/tinc.conf
 	done
 
-	# Edit the tinc-up script
-	echo "#!/bin/sh" >/etc/tinc/"${NETWORK}"/tinc-up
-	echo "ifconfig ${INTERFACE} ${PRIVATE_IP} netmask 255.255.255.0" >> /etc/tinc/"${NETWORK}"/tinc-up
+	# Create the tinc-up / down scripts
+    cat <<EOF > /etc/tinc/"${NETWORK}"/tinc-up
+#!/bin/sh
+ifconfig ${INTERFACE} ${PRIVATE_IP} netmask 255.255.255.0
+EOF
 
-	echo "#!/bin/sh" > /etc/tinc/"${NETWORK}"/tinc-down
-	echo "ifconfig ${INTERFACE} down" >> /etc/tinc/"${NETWORK}"/tinc-down
+    cat <<EOF > /etc/tinc/"${NETWORK}"/tinc-down
+#!/bin/sh
+ifconfig ${INTERFACE} down
+EOF
 
 	### Grab latest hosts entries from Git
 	if var_true "${ENABLE_GIT}" ; then
@@ -110,9 +105,9 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 	chmod +x /etc/tinc/${NETWORK}/tinc-up
 	chmod +x /etc/tinc/${NETWORK}/tinc-down
 
-	mkdir -p ${LOG_PATH}
-	touch ${LOG_PATH}/${NETWORK}.log
-	create_logrotate tinc ${LOG_PATH}/${NETWORK}.log tinc
+	mkdir -p "${LOG_PATH}"
+	touch "${LOG_PATH}"/"${NETWORK}".log
+	create_logrotate tinc "${LOG_PATH}"/"${NETWORK}".log tinc
 fi
 
 liftoff

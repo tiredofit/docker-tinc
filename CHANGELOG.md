@@ -1,3 +1,12 @@
+## 3.4.0 2023-06-01 <dave at tiredofit dot ca>
+
+This release changes the DEBUG environment variable into LOG_LEVEl variable. Old Debug environment variables will be phased out in a future release
+
+   ### Changed
+      - Switch DEBUG to LOG_LEVEL and set default to 2
+      - Refactor script and do a better job at creating configuration
+
+
 ## 3.3.1 2023-05-10 <dave at tiredofit dot ca>
 
    ### Added

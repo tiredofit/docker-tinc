@@ -10,20 +10,19 @@ liftoff
 sleep 120
 
 while true ; do
-  sleep ${WATCHDOG_FREQUENCY}
-  print_debug "[$(date +"%Y%m%d-%H%M%S")] Checking for ping response for ${WATCHDOG_HOST}"
-  ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
-  if [ "$?" != "0" ]; then
-    print_debug "[$(date +"%Y%m%d-%H%M%S")] Watchdog Try #2"
+    sleep "${WATCHDOG_FREQUENCY}"
+    print_debug "[$(date +"%Y%m%d-%H%M%S")] Checking for ping response for ${WATCHDOG_HOST}"
     ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
     if [ "$?" != "0" ]; then
-      print_debug "[$(date +"%Y%m%d-%H%M%S")] Watchdog Try #3"
-      ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
-      if [ "$?" != "0" ]; then
-        print_info "[$(date +"%Y%m%d-%H%M%S")] Could not reach watchdog host ${WATCHDOG_HOST} - Restarting Tinc"
-        silent tinc -n ${NETWORK} stop
-      fi
+        print_debug "[$(date +"%Y%m%d-%H%M%S")] Watchdog Try #2"
+        ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
+        if [ "$?" != "0" ]; then
+            print_debug "[$(date +"%Y%m%d-%H%M%S")] Watchdog Try #3"
+            ping -c1 -t255 ${WATCHDOG_HOST} 2>/dev/null 1>/dev/null
+            if [ "$?" != "0" ]; then
+                print_info "[$(date +"%Y%m%d-%H%M%S")] Could not reach watchdog host ${WATCHDOG_HOST} - Restarting Tinc"
+                silent tinc -n "${NETWORK}" stop
+            fi
+        fi
     fi
-  fi
-
 done

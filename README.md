@@ -33,7 +33,7 @@ This will build a Docker Image for [tinc](https://www.tinc.org/) - A VPN service
 - [Installation](#installation)
   - [Build from Source](#build-from-source)
   - [Prebuilt Images](#prebuilt-images)
-    - [Multi Architecture](#multi-archictecture)
+    - [Multi Architecture](#multi-architecture)
 - [Configuration](#configuration)
   - [Quick Start](#quick-start)
   - [Persistent Storage](#persistent-storage)
@@ -62,11 +62,13 @@ Clone this repository and build the image with `docker build <arguments> (imagen
 ### Prebuilt Images
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/tinc)
 
-Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-/pkgs/container/docker-) 
- 
+```bash
+docker pull docker.io/tiredofit/docker-tinc:(imagetag)
+Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-tinc/pkgs/container/docker-tinc)
+
+```bash
+docker pull ghcr.io/tiredofit/docker-tinc:(imagetag)
 ```
-docker pull ghcr.io/tiredofit/docker-:(imagetag)
-``` 
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
@@ -113,7 +115,6 @@ Be sure to view the following repositories to understand all the customizable op
 | `CIPHER`               | Encryption Cipher                                                                                                    | `aes-256-cbc`   |
 | `COMPRESSION`          | Level of LZO Compression (e.g. 9)                                                                                    | `0`             |
 | `CRON_PERIOD`          | Adjustable time to check GIT Server for any updates                                                                  | `30`            |
-| `DEBUG`                | Adjustable Debug level as per tinc documentation (e.g 5)                                                             | `0`             |
 | `DIGEST`               | Hashing Digest                                                                                                       | `sha256`        |
 | `ENABLE_GIT`           | Enable Git Repository Functionality `TRUE` or `FALSE`                                                                | `TRUE`          |
 | `ENABLE_CONFIG_RELOAD` | Enable reloading Tinc when configuration changes                                                                     | `TRUE`          |
@@ -123,6 +124,7 @@ Be sure to view the following repositories to understand all the customizable op
 | `GIT_USER`             | Username to Authenticate to git server (e.g. `username`)                                                             |                 |
 | `INTERFACE`            | Which Interface to use (relies on /dev/tun) (e.g. `tun0`)                                                            | `tun0`          |
 | `LISTEN_PORT`          | Listening Port                                                                                                       | `655`           |
+| `LOG_LEVEL`            | Adjustable Debug level as per tinc documentation (e.g 5)                                                             | `2`             |
 | `LOG_PATH`             | Log Path                                                                                                             | `/var/log/tinc` |
 | `MAC_LENGTH`           | MAC Length                                                                                                           | `16`            |
 | `NETWORK`              | The VPN name -  (e.g. `securenetwork`)                                                                               |                 |
@@ -151,9 +153,9 @@ The following ports are exposed.
 
 For debugging and maintenance purposes you may want access the containers shell.
 
-``bash
+````bash
 docker exec -it (whatever your container name is) bash
-``
+````
 
 ## Support
 
@@ -161,6 +163,7 @@ These images were built to serve a specific need in a production environment and
 ### Usage
 - The [Discussions board](../../discussions) is a great place for working with the community on tips and tricks of using this image.
 - Consider [sponsoring me](https://github.com/sponsors/tiredofit) for personalized support
+
 ### Bugfixes
 - Please, submit a [Bug Report](issues/new) if something isn't working as expected. I'll do my best to issue a fix in short order.
 
