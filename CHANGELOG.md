@@ -1,3 +1,9 @@
+## 3.4.1 2023-12-08 <dave at tiredofit dot ca>
+
+   ### Added
+      - Change base image to tiredofit/alpine:3.19
+
+
 ## 3.4.0 2023-06-01 <dave at tiredofit dot ca>
 
 This release changes the DEBUG environment variable into LOG_LEVEl variable. Old Debug environment variables will be phased out in a future release
