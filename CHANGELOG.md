@@ -1,3 +1,12 @@
+## 3.4.2 2024-01-23 <dave at tiredofit dot ca>
+
+   ### Added
+      - Tinc commit 7eeb29220a73ab9c5367f652873042f8a81c6cef
+
+   ### Changed
+      - Cleanup package size
+
+
 ## 3.4.1 2023-12-08 <dave at tiredofit dot ca>
 
    ### Added
