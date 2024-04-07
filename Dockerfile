@@ -1,7 +1,7 @@
 FROM docker.io/tiredofit/alpine:3.19
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-ENV TINC_VERSION=7eeb29220a73ab9c5367f652873042f8a81c6cef \
+ENV TINC_VERSION=d9e42faa6a7f4da98502be44566605a01a16a637 \
     CONTAINER_ENABLE_MESSAGING=FALSE \
     IMAGE_NAME="tiredofit/tinc" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-tinc/"

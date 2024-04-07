@@ -1,3 +1,9 @@
+## 3.4.3 2024-04-07 <dave at tiredofit dot ca>
+
+   ### Added
+      - Tinc commit d9e42faa6a7f4da98502be44566605a01a16a637
+
+
 ## 3.4.2 2024-01-23 <dave at tiredofit dot ca>
 
    ### Added
