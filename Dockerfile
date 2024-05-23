@@ -1,4 +1,4 @@
-FROM docker.io/tiredofit/alpine:3.19
+FROM docker.io/tiredofit/alpine:3.20
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV TINC_VERSION=d9e42faa6a7f4da98502be44566605a01a16a637 \

@@ -1,3 +1,9 @@
+## 3.4.4 2024-05-22 <dave at tiredofit dot ca>
+
+   ### Added
+      - Switch to tiredofit/alpine 3.20 baseEE
+
+
 ## 3.4.3 2024-04-07 <dave at tiredofit dot ca>
 
    ### Added
