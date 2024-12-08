@@ -1,3 +1,9 @@
+## 3.4.5 2024-12-07 <dave at tiredofit dot ca>
+
+   ### Added
+      - Alpine 3.21 base
+
+
 ## 3.4.4 2024-05-22 <dave at tiredofit dot ca>
 
    ### Added
